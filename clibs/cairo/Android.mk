@@ -21,7 +21,7 @@ include $(CLEAR_VARS)
 LIBPIXMAN_CFLAGS = -D_USE_MATH_DEFINES -DPIXMAN_NO_TLS -DPACKAGE="android-cairo" -O2 \
                 -I$(PIXMAN_SOURCES_PATH)/pixman -I$(MAKEFILE_PATH)/pixman-extra \
                 -include "pixman-elf-fix.h" \
-                -Wno-missing-field-initializers
+                -Wno-missing-field-initializers -Wno-enum-conversion
                 
 export CAIRO_CFLAGS := -DCAIRO_HAS_GOBJECT_FUNCTIONS=1
 
@@ -34,12 +34,12 @@ LIBCAIRO_CFLAGS:= $(LIBPIXMAN_CFLAGS) $(CAIRO_CFLAGS)               \
 include $(CAIRO_SOURCES_PATH)/src/Makefile.sources
 include $(PIXMAN_SOURCES_PATH)/pixman/Makefile.sources
 
-ifeq ($(TARGET_ARCH),arm)
-    libpixman_sources += pixman-arm-neon.c pixman-arm-simd.c \
-                         pixman-arm-simd-asm.S pixman-arm-simd-asm-scaled.S \
-                         pixman-arm-neon-asm.S pixman-arm-neon-asm-bilinear.S
-    LIBPIXMAN_CFLAGS += -DUSE_ARM_NEON -DUSE_ARM_SIMD
-endif
+#ifeq ($(TARGET_ARCH),arm)
+#    libpixman_sources += pixman-arm-neon.c pixman-arm-simd.c \
+#                         pixman-arm-simd-asm.S pixman-arm-simd-asm-scaled.S \
+#                         pixman-arm-neon-asm.S pixman-arm-neon-asm-bilinear.S
+#    LIBPIXMAN_CFLAGS += -DUSE_ARM_NEON -DUSE_ARM_SIMD
+#endif
 
 include $(CLEAR_VARS)
 
@@ -48,10 +48,6 @@ LOCAL_MODULE    := cairo
 LOCAL_CFLAGS    := -O2 $(LIBCAIRO_CFLAGS) -I$(PIXMAN_SOURCES_PATH)/pixman \
                    -I$(CAIRO_SOURCES_PATH)/src -I$(MAKEFILE_PATH)/cairo-extra \
                    -I$(MAKEFILE_PATH)/pixman-extra -Wno-missing-field-initializers
-
-# remove the following line once NDK updates it's GCC to a version
-# with this fix https://gcc.gnu.org/bugzilla/show_bug.cgi?id=56982
-LOCAL_CFLAGS    += -fno-tree-dominator-opts
 
 LOCAL_SRC_FILES := cairo/util/cairo-gobject/cairo-gobject-enums.c \
                    cairo/util/cairo-gobject/cairo-gobject-structs.c \

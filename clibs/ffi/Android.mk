@@ -26,12 +26,12 @@ ffi_arch := $(TARGET_ARCH)
 ffi_os := linux
 
 # This include just keeps the nesting a bit saner.
-include $(LOCAL_PATH)/Libffi.mk
+include $(LOCAL_PATH)/../Libffi.mk
 
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE := ffi
 
-FFI_INCLUDES := $(LOCAL_PATH)/$(ffi_os)-$(ffi_arch) $(LOCAL_PATH)/include
+FFI_INCLUDES := $(LOCAL_PATH)/$(ffi_os)-$(ffi_arch) $(LOCAL_PATH)/include $(MAKEFILE_PATH)
 LOCAL_C_INCLUDES := $(FFI_INCLUDES)
 
 include $(BUILD_STATIC_LIBRARY)

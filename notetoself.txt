@@ -1,0 +1,4 @@
+TODO:
+- Check and remove androidsupport dependency if unneeded
+- Cairo: Fix use of assembly code
+- Update Everything!

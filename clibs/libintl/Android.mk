@@ -11,13 +11,20 @@
 # Author(s): Evgeny Sologubov
 #
 
-GTK_CSS_SRC := $(call my-dir)/distsrc/gtk/resources/theme/gtk-default.css
-GTK_CSS_DST := $(NDK_APP_LIBS_OUT)/assets/share/themes/Android/gtk-3.0/gtk.css
+MAKEFILE_PATH := $(call my-dir)
+LOCAL_PATH    := $(MAKEFILE_PATH)/distsrc/intl
 
-installed_modules: $(GTK_CSS_DST)
+include $(CLEAR_VARS)
 
-$(call generate-file-dir,$(GTK_CSS_DST))
+include $(LOCAL_PATH)/Sources.mk
 
-$(GTK_CSS_DST): clean-installed-binaries
-	$(hide) $(call host-install,$(GTK_CSS_SRC),$(GTK_CSS_DST))
+export LIBINTL_INCLUDES := $(MAKEFILE_PATH)/include
 
+
+LOCAL_MODULE     := libintl
+LOCAL_SRC_FILES  := $(SOURCES) $(LOCAL_PATH)/plural.c
+LOCAL_CFLAGS     := -g -O2 -fvisibility=hidden -DHAVE_CONFIG_H
+LOCAL_C_INCLUDES := $(LIBINTL_INCLUDES) $(LOCAL_PATH) $(MAKEFILE_PATH)
+
+
+include $(BUILD_STATIC_LIBRARY)

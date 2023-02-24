@@ -13,10 +13,6 @@
 
 #undef ENABLE_NLS
 
-// the following two are defined in android/support module
-extern char *gettext(const char *msgid);
-extern char *dgettext(const char *domainname, const char *msgid);
-
 // "config.h.win32" defines _GLIB_EXTERN incompatible with gmacros.h
 #undef _GLIB_EXTERN
 // redefine it!

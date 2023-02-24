@@ -17,7 +17,7 @@ $(call import-add-path, $(GTKA_LIB_PATH))
 
 LOCAL_LDLIBS     += -llog -landroid -lEGL -lGLESv2
 LOCAL_C_INCLUDES += $(GTK_INCLUDES)
-LOCAL_STATIC_LIBRARIES += gtk gdk atk gdk-pixbuf pango cairo gmodule gio gobject glib ffi pcre \
+LOCAL_STATIC_LIBRARIES += libintl gtk gdk atk gdk-pixbuf pango cairo gmodule gio gobject glib ffi pcre \
                           android_native_app_glue android_support
 
 include $(call my-dir)/gtkresources.mk
@@ -34,6 +34,7 @@ $(call import-module,gmodule)
 $(call import-module,freetype)
 $(call import-module,fontconfig)
 $(call import-module,harfbuzz)
+$(call import-module,libintl)
 $(call import-module,pango)
 $(call import-module,cairo)
 $(call import-module,gdk-pixbuf)

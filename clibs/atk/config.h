@@ -15,7 +15,3 @@
 // redefine it!
 #define _ATK_EXTERN extern
 
-// the following two are defined in android/support module
-extern char *gettext(const char *msgid);
-extern char *dgettext(const char *domainname, const char *msgid);
-

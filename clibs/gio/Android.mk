@@ -45,10 +45,10 @@ LOCAL_SRC_FILES:= $(GIO_SOURCES)
 LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)
 LOCAL_CFLAGS += -DNVALGRIND=1 -DGIO_COMPILATION=1 -DGIO_MODULE_DIR=\".\" -DXDG_PREFIX=_gio_xdg
 LOCAL_C_INCLUDES := $(MAKEFILE_PATH) $(MAKEFILE_PATH)/../glib $(MAKEFILE_PATH)/include \
-                     $(MAKEFILE_PATH)/include/gio $(GLIB_INCLUDES) $(FFI_INCLUDES) \
-                    $(NDK_ROOT)/sources/android/support/include \
+                    $(MAKEFILE_PATH)/include/gio $(GLIB_INCLUDES) $(FFI_INCLUDES) \
+					$(MAKEFILE_PATH)/../libintl/include \
                     $(NDK_ROOT)/sources/android/support/src/musl-locale
-LOCAL_STATIC_LIBRARIES := glib android_support
+LOCAL_STATIC_LIBRARIES := glib
 
 include $(BUILD_STATIC_LIBRARY)
 

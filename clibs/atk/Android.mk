@@ -25,7 +25,7 @@ LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)
 LOCAL_CFLAGS += -DNVALGRIND=1 -DATK_COMPILATION=1 -DATK_DISABLE_DEPRECATION_WARNINGS=1 \
                 -DGLIB_DISABLE_DEPRECATION_WARNINGS=1
 LOCAL_C_INCLUDES = $(MAKEFILE_PATH) $(MAKEFILE_PATH)/atk $(ATK_SOURCES_PATH) \
-                    $(GLIB_INCLUDES) \
+                    $(GLIB_INCLUDES) $(LIBINTL_INCLUDES) \
                     $(NDK_ROOT)/sources/android/support/include \
                     $(NDK_ROOT)/sources/android/support/src/musl-locale
 LOCAL_STATIC_LIBRARIES := android_support glib gobject

@@ -24,7 +24,7 @@ LOCAL_SRC_FILES:= $(filter %.c, $(gobject_c_sources))
 LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)
 LOCAL_CFLAGS += -DNVALGRIND=1 -DGOBJECT_COMPILATION=1
 LOCAL_C_INCLUDES := $(MAKEFILE_PATH) $(MAKEFILE_PATH)/../glib \
-                    $(GLIB_INCLUDES) $(FFI_INCLUDES) \
+                    $(GLIB_INCLUDES) $(FFI_INCLUDES) $(MAKEFILE_PATH)/../libintl/include \
                     $(NDK_ROOT)/sources/android/support/include \
                     $(NDK_ROOT)/sources/android/support/src/musl-locale
 LOCAL_STATIC_LIBRARIES := glib ffi

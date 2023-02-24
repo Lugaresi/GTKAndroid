@@ -29,7 +29,7 @@ LOCAL_SRC_FILES:= $(GDK_ANDROID_SOURCES) $(filter %.c, $(am__libgdk_3_la_SOURCES
 LOCAL_EXPORT_LDLIBS := -llog
 LOCAL_CFLAGS += -DNVALGRIND=1 -DGDK_COMPILATION=1 $(CAIRO_CFLAGS)
 LOCAL_C_INCLUDES := $(MAKEFILE_PATH) $(MAKEFILE_PATH)/include $(MAKEFILE_PATH)/include/gdk $(MAKEFILE_PATH)/../gtk \
-                    $(GTK_SOURCES_PATH) $(GDK_PIXBUG_INCLUDES) $(GLIB_INCLUDES) \
+                    $(GTK_SOURCES_PATH) $(GDK_PIXBUG_INCLUDES) $(GLIB_INCLUDES) $(LIBINTL_INCLUDES) \
                     $(PANGO_INCLUDES) $(CAIRO_INCLUDES) $(FONTCONFIG_INCLUDES) \
                     $(NDK_ROOT)/sources/android/support/include \
                     $(NDK_ROOT)/sources/android/support/src/musl-locale

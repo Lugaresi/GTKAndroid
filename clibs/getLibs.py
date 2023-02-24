@@ -14,6 +14,7 @@
 import os, os.path, re
 import tarfile, subprocess
 import time
+import shutil
 try:
     # Python 2+
     from urllib2 import urlopen
@@ -248,8 +249,8 @@ def run():
         return
 
     # ffi
-    dl.download("ffi/distsrc", "https://github.com/android/platform_external_libffi/archive/android-4.4.4_r2.0.1.tar.gz",
-                "platform_external_libffi-android-4.4.4_r2.0.1")
+    dl.download("ffi/distsrc", "https://github.com/android/platform_external_libffi/archive/android-9.0.0_r47.tar.gz",
+                "platform_external_libffi-android-9.0.0_r47")
 
     # glib, gobject, gio
     dl.download("glib/distsrc", "http://ftp.gnome.org/pub/gnome/sources/glib/2.40/glib-2.40.2.tar.xz")
@@ -317,6 +318,13 @@ def run():
     dl.download("harfbuzz/distsrc", "http://www.freedesktop.org/software/harfbuzz/release/harfbuzz-0.9.36.tar.bz2") 
     makeVariablesFile("harfbuzz/distsrc/src/Makefile.in", "harfbuzz/distsrc/src/Makefile.sources",
                       ["HBSOURCES"])
+
+    # libintl ( GDB comes with a self contained version)
+    dl.download("libintl/distsrc", "https://ftp.gnu.org/gnu/gdb/gdb-13.1.tar.xz")
+    makeVariablesFile("libintl/distsrc/intl/Makefile.in", "libintl/distsrc/intl/Sources.mk",
+                      ["SOURCES"])
+    # copy our include file
+    shutil.copyfile("libintl/distsrc/intl/libgnuintl.h", "libintl/include/libintl.h")
 
     # cairo & pixman
     print ("Please be aware that downloading files from cairographics.org can take REALLY LONG TIME (up to 20-25 minutes)")

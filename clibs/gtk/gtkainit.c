@@ -54,11 +54,11 @@ static void log_handler(const gchar *log_domain, GLogLevelFlags log_level,
 // locale
 
 // Android NDK doesn't really support any locale except "C"
-char *setlocale(int category, const char *locale)
+/* char *setlocale(int category, const char *locale)
 {
     static const char C_LOCALE_SETTING[] = "C";
     return (char*) C_LOCALE_SETTING;
-}
+} */
 
 ///////////////////////////////////////////////////////////////////////////////////
 // window event handlers & initialization
@@ -88,7 +88,7 @@ static void adjust_default_font()
     }
 }
 
-static gtk_window_tweak_class()
+static void gtk_window_tweak_class()
 {
     GObjectClass *objClass = G_OBJECT_CLASS(g_type_class_ref(GTK_TYPE_WINDOW));
 
