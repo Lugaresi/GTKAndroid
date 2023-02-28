@@ -7,7 +7,6 @@
 
     <!-- This .apk has no Java code itself, so set hasCode to false. -->
     <application
-        android:debuggable="true"
         android:allowBackup="true"
         android:hasCode="true"
         android:icon="@drawable/ic_launcher"

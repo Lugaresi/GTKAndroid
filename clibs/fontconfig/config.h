@@ -5,23 +5,33 @@
 /* #undef AC_APPLE_UNIVERSAL_BUILD */
 
 /* The normal alignment of `double', in bytes. */
-//#define ALIGNOF_DOUBLE alignof(double)
+#define ALIGNOF_DOUBLE 8
+
+/* The normal alignment of `void *', in bytes. */
+/* #define ALIGNOF_VOID_P 4  */ /* See end of file */
 
 /* Use libxml2 instead of Expat */
 /* #undef ENABLE_LIBXML2 */
 
+/* Define to 1 if translation of program messages to the user's native
+   language is requested. */
+/* #undef ENABLE_NLS */
+
 /* Additional font directories */
-// #define FC_ADD_FONTS "yes"
+#define FC_ADD_FONTS "yes"
 
 /* Architecture prefix to use for cache file names */
 /* #undef FC_ARCHITECTURE */
 
 /* System font directory */
-#define FC_DEFAULT_FONTS "/system/fonts"
+#define FC_DEFAULT_FONTS "<dir>/system/fonts</dir>"
 
 #define FONTCONFIG_PATH "not/supposed/to/work"
 
 #define FC_CACHEDIR "/should/be/defined/by/GdkAndroidDisplay"
+
+/* The type of len parameter of the gperf hash/lookup function */
+#define FC_GPERF_SIZE_T size_t
 
 /* Define to nothing if C supports flexible array members, and to 1 if it does
    not. That way, with a declaration like `struct s { int n; double
@@ -32,8 +42,22 @@
    MSVC and with C++ compilers. */
 #define FLEXIBLE_ARRAY_MEMBER /**/
 
-/* Define to 1 if you have the <dirent.h> header file, and it defines `DIR'.
+/* Gettext package */
+#define GETTEXT_PACKAGE "fontconfig"
+
+/* Define to 1 if you have the Mac OS X function CFLocaleCopyCurrent in the
+   CoreFoundation framework. */
+/* #undef HAVE_CFLOCALECOPYCURRENT */
+
+/* Define to 1 if you have the Mac OS X function CFPreferencesCopyAppValue in
+   the CoreFoundation framework. */
+/* #undef HAVE_CFPREFERENCESCOPYAPPVALUE */
+
+/* Define if the GNU dcgettext() function is already present or preinstalled.
    */
+/* #undef HAVE_DCGETTEXT */
+
+/* Define to 1 if you have the <dirent.h> header file. */
 #define HAVE_DIRENT_H 1
 
 /* Define to 1 if you have the <dlfcn.h> header file. */
@@ -51,26 +75,20 @@
 /* Define to 1 if you have the `fstatvfs' function. */
 #define HAVE_FSTATVFS 1
 
-/* FT_Bitmap_Size structure includes y_ppem field */
-#define HAVE_FT_BITMAP_SIZE_Y_PPEM 1
+/* Define to 1 if you have the `FT_Done_MM_Var' function. */
+/* #undef HAVE_FT_DONE_MM_VAR */
 
 /* Define to 1 if you have the `FT_Get_BDF_Property' function. */
 #define HAVE_FT_GET_BDF_PROPERTY 1
-
-/* Define to 1 if you have the `FT_Get_Next_Char' function. */
-#define HAVE_FT_GET_NEXT_CHAR 1
 
 /* Define to 1 if you have the `FT_Get_PS_Font_Info' function. */
 #define HAVE_FT_GET_PS_FONT_INFO 1
 
 /* Define to 1 if you have the `FT_Get_X11_Font_Format' function. */
-//#define HAVE_FT_GET_X11_FONT_FORMAT 1
+#define HAVE_FT_GET_X11_FONT_FORMAT 1
 
 /* Define to 1 if you have the `FT_Has_PS_Glyph_Names' function. */
-//#define HAVE_FT_HAS_PS_GLYPH_NAMES 1
-
-/* Define to 1 if you have the `FT_Select_Size' function. */
-#define HAVE_FT_SELECT_SIZE 1
+#define HAVE_FT_HAS_PS_GLYPH_NAMES 1
 
 /* Define to 1 if you have the `getexecname' function. */
 /* #undef HAVE_GETEXECNAME */
@@ -82,10 +100,16 @@
 #define HAVE_GETOPT_LONG 1
 
 /* Define to 1 if you have the `getpagesize' function. */
-#define HAVE_GETPAGESIZE 1
+/* #undef HAVE_GETPAGESIZE */
 
 /* Define to 1 if you have the `getprogname' function. */
 /* #undef HAVE_GETPROGNAME */
+
+/* Define if the GNU gettext() function is already present or preinstalled. */
+#define HAVE_GETTEXT 1
+
+/* Define if you have the iconv() function and it works. */
+#define HAVE_ICONV 1
 
 /* Have Intel __sync_* atomic primitives */
 #define HAVE_INTEL_ATOMIC_PRIMITIVES 1
@@ -102,26 +126,26 @@
 /* Define to 1 if you have the `lstat' function. */
 #define HAVE_LSTAT 1
 
-/* Define to 1 if you have the <memory.h> header file. */
-#define HAVE_MEMORY_H 1
+/* Define to 1 if you have the <minix/config.h> header file. */
+/* #undef HAVE_MINIX_CONFIG_H */
 
 /* Define to 1 if you have the `mkdtemp' function. */
 #define HAVE_MKDTEMP 1
 
 /* Define to 1 if you have the `mkostemp' function. */
-#define HAVE_MKOSTEMP 0
+/* #undef HAVE_MKOSTEMP */
 
 /* Define to 1 if you have the `mkstemp' function. */
 #define HAVE_MKSTEMP 1
 
 /* Define to 1 if you have a working `mmap' system call. */
-/* #undef HAVE_MMAP */
+#define HAVE_MMAP 1
 
 /* Define to 1 if you have the <ndir.h> header file, and it defines `DIR'. */
 /* #undef HAVE_NDIR_H */
 
-/* Define to 1 if you have the 'posix_fadivse' function. */
-#define HAVE_POSIX_FADVISE 1
+/* Define to 1 if you have the 'posix_fadvise' function. */ /* Only Android API 21 or later */
+/* #undef HAVE_POSIX_FADVISE */
 
 /* Have POSIX threads */
 #define HAVE_PTHREAD 1
@@ -133,38 +157,16 @@
 #define HAVE_RAND 1
 
 /* Define to 1 if you have the `random' function. */
-/*#define HAVE_RANDOM 0 */
+/* #undef HAVE_RANDOM */
 
 /* Define to 1 if you have the `random_r' function. */
-/* #define HAVE_RANDOM_R 0 */
+/* #undef HAVE_RANDOM_R */
 
 /* Define to 1 if you have the `rand_r' function. */
-#define HAVE_RAND_R 1
+/* #undef HAVE_RAND_R */
 
 /* Define to 1 if you have the `readlink' function. */
 #define HAVE_READLINK 1
-
-/* Define to 1 if you have the `regcomp' function. */
-#define HAVE_REGCOMP 1
-
-/* Define to 1 if you have the `regerror' function. */
-#define HAVE_REGERROR 1
-
-/* Define to 1 if you have the `regexec' function. */
-#define HAVE_REGEXEC 1
-
-/* Define to 1 if you have the <regex.h> header file. */
-#define HAVE_REGEX_H 1
-
-/* Define to 1 if you have the `regfree' function. */
-#define HAVE_REGFREE 1
-
-/* Define to 1 if you have the 'scandir' function. */
-#define HAVE_SCANDIR 1
-
-/* Define to 1 if you have the 'scandir' function with int (* compar)(const
-   void *, const void *) */
-/* #undef HAVE_SCANDIR_VOID_P */
 
 /* Define to 1 if you have the <sched.h> header file. */
 /* #undef HAVE_SCHED_H */
@@ -175,11 +177,23 @@
 /* Have Solaris __machine_*_barrier and atomic_* operations */
 /* #undef HAVE_SOLARIS_ATOMIC_OPS */
 
+/* Have C99 stdatomic atomic primitives */
+#define HAVE_STDATOMIC_PRIMITIVES 1
+
 /* Define to 1 if you have the <stdint.h> header file. */
 #define HAVE_STDINT_H 1
 
+/* Define to 1 if you have the <stdio.h> header file. */
+#define HAVE_STDIO_H 1
+
 /* Define to 1 if you have the <stdlib.h> header file. */
 #define HAVE_STDLIB_H 1
+
+/* Define to 1 if you have the `strerror' function. */
+#define HAVE_STRERROR 1
+
+/* Define to 1 if you have the `strerror_r' function. */
+#define HAVE_STRERROR_R 1
 
 /* Define to 1 if you have the <strings.h> header file. */
 #define HAVE_STRINGS_H 1
@@ -202,6 +216,9 @@
 /* Define to 1 if `f_fstypename' is a member of `struct statvfs'. */
 /* #undef HAVE_STRUCT_STATVFS_F_FSTYPENAME */
 
+/* Define to 1 if `st_mtim' is a member of `struct stat'. */
+#define HAVE_STRUCT_STAT_ST_MTIM 1
+
 /* Define to 1 if you have the <sys/dir.h> header file, and it defines `DIR'.
    */
 /* #undef HAVE_SYS_DIR_H */
@@ -220,7 +237,7 @@
 #define HAVE_SYS_STATFS_H 1
 
 /* Define to 1 if you have the <sys/statvfs.h> header file. */
-/* #define HAVE_SYS_STATVFS_H 0 */
+#define HAVE_SYS_STATVFS_H 1
 
 /* Define to 1 if you have the <sys/stat.h> header file. */
 #define HAVE_SYS_STAT_H 1
@@ -240,6 +257,9 @@
 /* Can use #warning in C files */
 #define HAVE_WARNING_CPP_DIRECTIVE 1
 
+/* Define to 1 if you have the <wchar.h> header file. */
+#define HAVE_WCHAR_H 1
+
 /* Use xmlparse.h instead of expat.h */
 /* #undef HAVE_XMLPARSE_H */
 
@@ -249,17 +269,20 @@
 /* Define to 1 if you have the `_mktemp_s' function. */
 /* #undef HAVE__MKTEMP_S */
 
+/* Define to the sub-directory where libtool stores uninstalled libraries. */
+#define LT_OBJDIR ".libs/"
+
 /* Name of package */
 #define PACKAGE "fontconfig"
 
 /* Define to the address where bug reports for this package should be sent. */
-#define PACKAGE_BUGREPORT "https://bugs.freedesktop.org/enter_bug.cgi?product=fontconfig"
+#define PACKAGE_BUGREPORT "https://gitlab.freedesktop.org/fontconfig/fontconfig/issues/new"
 
 /* Define to the full name of this package. */
 #define PACKAGE_NAME "fontconfig"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "fontconfig 2.11.1"
+#define PACKAGE_STRING "fontconfig 2.14.2"
 
 /* Define to the one symbol short name of this package. */
 #define PACKAGE_TARNAME "fontconfig"
@@ -268,7 +291,7 @@
 #define PACKAGE_URL ""
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "2.11.1"
+#define PACKAGE_VERSION "2.14.2"
 
 /* Define to necessary symbol if this constant uses a non-standard name on
    your system. */
@@ -287,58 +310,127 @@
 #define SIZEOF_SHORT (sizeof(short))
 
 /* The size of `void*', as computed by sizeof. */
-#define SIZEOF_VOIDP (sizeof(void *))
+#define SIZEOF_VOIDP (sizeof(void*))
 
-/* Define to 1 if you have the ANSI C header files. */
+/* The size of `void *', as computed by sizeof. */
+/* #define SIZEOF_VOID_P 4  */ /* See end of file */
+
+/* Define to 1 if all of the C90 standard headers exist (not just the ones
+   required in a freestanding environment). This macro is provided for
+   backward compatibility; new code need not use it. */
 #define STDC_HEADERS 1
 
 /* Use iconv. */
-#define USE_ICONV 1
-
-/* Use regex */
-#define USE_REGEX /**/
+#define USE_ICONV 0
 
 /* Enable extensions on AIX 3, Interix.  */
 #ifndef _ALL_SOURCE
 # define _ALL_SOURCE 1
 #endif
-/* Enable GNU extensions on systems that have them.  */
-#ifndef _GNU_SOURCE
-# define _GNU_SOURCE 1
-#endif
-/* Enable threading extensions on Solaris.  */
-#ifndef _POSIX_PTHREAD_SEMANTICS
-# define _POSIX_PTHREAD_SEMANTICS 1
-#endif
-/* Enable extensions on HP NonStop.  */
-#ifndef _TANDEM_SOURCE
-# define _TANDEM_SOURCE 1
+/* Enable general extensions on macOS.  */
+#ifndef _DARWIN_C_SOURCE
+# define _DARWIN_C_SOURCE 1
 #endif
 /* Enable general extensions on Solaris.  */
 #ifndef __EXTENSIONS__
 # define __EXTENSIONS__ 1
 #endif
+/* Enable GNU extensions on systems that have them.  */
+#ifndef _GNU_SOURCE
+# define _GNU_SOURCE 1
+#endif
+/* Enable X/Open compliant socket functions that do not require linking
+   with -lxnet on HP-UX 11.11.  */
+#ifndef _HPUX_ALT_XOPEN_SOCKET_API
+# define _HPUX_ALT_XOPEN_SOCKET_API 1
+#endif
+/* Identify the host operating system as Minix.
+   This macro does not affect the system headers' behavior.
+   A future release of Autoconf may stop defining this macro.  */
+#ifndef _MINIX
+/* # undef _MINIX */
+#endif
+/* Enable general extensions on NetBSD.
+   Enable NetBSD compatibility extensions on Minix.  */
+#ifndef _NETBSD_SOURCE
+# define _NETBSD_SOURCE 1
+#endif
+/* Enable OpenBSD compatibility extensions on NetBSD.
+   Oddly enough, this does nothing on OpenBSD.  */
+#ifndef _OPENBSD_SOURCE
+# define _OPENBSD_SOURCE 1
+#endif
+/* Define to 1 if needed for POSIX-compatible behavior.  */
+#ifndef _POSIX_SOURCE
+/* # undef _POSIX_SOURCE */
+#endif
+/* Define to 2 if needed for POSIX-compatible behavior.  */
+#ifndef _POSIX_1_SOURCE
+/* # undef _POSIX_1_SOURCE */
+#endif
+/* Enable POSIX-compatible threading on Solaris.  */
+#ifndef _POSIX_PTHREAD_SEMANTICS
+# define _POSIX_PTHREAD_SEMANTICS 1
+#endif
+/* Enable extensions specified by ISO/IEC TS 18661-5:2014.  */
+#ifndef __STDC_WANT_IEC_60559_ATTRIBS_EXT__
+# define __STDC_WANT_IEC_60559_ATTRIBS_EXT__ 1
+#endif
+/* Enable extensions specified by ISO/IEC TS 18661-1:2014.  */
+#ifndef __STDC_WANT_IEC_60559_BFP_EXT__
+# define __STDC_WANT_IEC_60559_BFP_EXT__ 1
+#endif
+/* Enable extensions specified by ISO/IEC TS 18661-2:2015.  */
+#ifndef __STDC_WANT_IEC_60559_DFP_EXT__
+# define __STDC_WANT_IEC_60559_DFP_EXT__ 1
+#endif
+/* Enable extensions specified by ISO/IEC TS 18661-4:2015.  */
+#ifndef __STDC_WANT_IEC_60559_FUNCS_EXT__
+# define __STDC_WANT_IEC_60559_FUNCS_EXT__ 1
+#endif
+/* Enable extensions specified by ISO/IEC TS 18661-3:2015.  */
+#ifndef __STDC_WANT_IEC_60559_TYPES_EXT__
+# define __STDC_WANT_IEC_60559_TYPES_EXT__ 1
+#endif
+/* Enable extensions specified by ISO/IEC TR 24731-2:2010.  */
+#ifndef __STDC_WANT_LIB_EXT2__
+# define __STDC_WANT_LIB_EXT2__ 1
+#endif
+/* Enable extensions specified by ISO/IEC 24747:2009.  */
+#ifndef __STDC_WANT_MATH_SPEC_FUNCS__
+# define __STDC_WANT_MATH_SPEC_FUNCS__ 1
+#endif
+/* Enable extensions on HP NonStop.  */
+#ifndef _TANDEM_SOURCE
+# define _TANDEM_SOURCE 1
+#endif
+/* Enable X/Open extensions.  Define to 500 only if necessary
+   to make mbstate_t available.  */
+#ifndef _XOPEN_SOURCE
+/* # undef _XOPEN_SOURCE */
+#endif
 
 
 /* Version number of package */
-#define VERSION "2.11.1"
+#define VERSION "2.14.2"
 
+/* Define WORDS_BIGENDIAN to 1 if your processor stores words with the most
+   significant byte first (like Motorola and SPARC, unlike Intel). */
+#if defined AC_APPLE_UNIVERSAL_BUILD
+# if defined __BIG_ENDIAN__
+#  define WORDS_BIGENDIAN 1
+# endif
+#else
+# ifndef WORDS_BIGENDIAN
+/* #  undef WORDS_BIGENDIAN */
+# endif
+#endif
 
 /* Number of bits in a file offset, on hosts where this is settable. */
-/* #undef _FILE_OFFSET_BITS */
+#define _FILE_OFFSET_BITS 64
 
 /* Define for large files, on AIX-style hosts. */
 /* #undef _LARGE_FILES */
-
-/* Define to 1 if on MINIX. */
-/* #undef _MINIX */
-
-/* Define to 2 if the system does not provide POSIX.1 features except with
-   this defined. */
-/* #undef _POSIX_1_SOURCE */
-
-/* Define to 1 if you need to in order for `stat' and other things to work. */
-/* #undef _POSIX_SOURCE */
 
 /* Define to empty if `const' does not conform to ANSI C. */
 /* #undef const */
@@ -349,11 +441,16 @@
 /* #undef inline */
 #endif
 
+/* Define as a signed integer type capable of holding a process identifier. */
+/* #undef pid_t */
+
+#include "config-fixups.h"
+
 #include <sys/endian.h>
 #ifdef __LP64__
-#   define SIZEOF_VOID_P 8
 #   define ALIGNOF_DOUBLE 8
+#   define ALIGNOF_VOID_P 8
 #else
 #   define SIZEOF_VOID_P 4
-#   define ALIGNOF_DOUBLE 4
+#   define ALIGNOF_VOID_P 4
 # endif

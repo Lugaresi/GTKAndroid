@@ -311,8 +311,8 @@ def run():
                       ["gtka11y_c_sources"])
 
     # freetype, fontconfig, harfbuzz
-    dl.download("freetype/distsrc", "https://download.savannah.gnu.org/releases/freetype/freetype-old/freetype-2.5.4.tar.bz2") 
-    dl.download("fontconfig/distsrc", "http://www.freedesktop.org/software/fontconfig/release/fontconfig-2.11.1.tar.bz2") 
+    dl.download("freetype/distsrc", "https://download.savannah.gnu.org/releases/freetype/freetype-2.13.0.tar.xz")
+    dl.download("fontconfig/distsrc", "https://www.freedesktop.org/software/fontconfig/release/fontconfig-2.14.2.tar.xz")
     makeVariablesFile("fontconfig/distsrc/src/Makefile.in", "fontconfig/distsrc/src/Makefile.sources",
                       ["libfontconfig_la_SOURCES"])
     dl.download("harfbuzz/distsrc", "http://www.freedesktop.org/software/harfbuzz/release/harfbuzz-0.9.36.tar.bz2") 
@@ -325,7 +325,11 @@ def run():
                       ["SOURCES"])
     # copy our include file
     shutil.copyfile("libintl/distsrc/intl/libgnuintl.h", "libintl/include/libintl.h")
-
+    
+    #expat
+    dl.download("expat/distsrc", "https://github.com/libexpat/libexpat/releases/download/R_2_5_0/expat-2.5.0.tar.xz")
+    makeVariablesFile("expat/distsrc/lib/Makefile.in", "expat/distsrc/lib/Makefile.sources",
+                      ["libexpatinternal_la_SOURCES"])
     # cairo & pixman
     print ("Please be aware that downloading files from cairographics.org can take REALLY LONG TIME (up to 20-25 minutes)")
     dl.download("cairo/distsrc/cairo", "http://cairographics.org/releases/cairo-1.14.0.tar.xz")

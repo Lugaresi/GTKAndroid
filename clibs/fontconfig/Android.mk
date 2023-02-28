@@ -20,13 +20,13 @@ export FONTCONFIG_INCLUDES := $(LOCAL_PATH)
 
 include $(LOCAL_PATH)/src/Makefile.sources
 
-libfontconfig_la_SOURCES := $(filter-out fcxml.c fcinit.c, $(libfontconfig_la_SOURCES))
+libfontconfig_la_SOURCES := $(filter-out fcinit.c, $(libfontconfig_la_SOURCES))
 
 LOCAL_MODULE     := fontconfig
 LOCAL_SRC_FILES  := $(addprefix src/, $(filter %.c, $(libfontconfig_la_SOURCES))) \
-                    ../fcinit_android.c ../fcxml_android.c
+                    ../fcinit_android.c
 LOCAL_CFLAGS     += -DHAVE_CONFIG_H=1
-LOCAL_C_INCLUDES := $(MAKEFILE_PATH) $(FREETYPE_INCLUDES)
+LOCAL_C_INCLUDES := $(MAKEFILE_PATH) $(FREETYPE_INCLUDES) $(EXPAT_INCLUDES) $(LIBINTL_INCLUDES)
 
 LOCAL_STATIC_LIBRARIES := android_support freetype
 
@@ -34,3 +34,5 @@ include $(BUILD_STATIC_LIBRARY)
 
 $(call import-module,android/support)
 $(call import-module,freetype)
+$(call import-module,expat)
+$(call import-module,libintl)

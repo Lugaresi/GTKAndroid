@@ -46,11 +46,16 @@ static FcConfig *
 FcInitFallbackConfig (void)
 {
     FcConfig    *config;
+	const FcChar8 *fallback = (const FcChar8 *) ""	\
+	"<fontconfig>" \
+	FC_DEFAULT_FONTS \
+/*	"  <include ignore_missing=\"yes\">" CONFIGDIR "</include>" */
+	"</fontconfig>";
 
     config = FcConfigCreate ();
     if (!config)
         goto bail0;
-    if (!FcConfigAddDir (config, (FcChar8 *) FC_DEFAULT_FONTS))
+    if (!FcConfigParseAndLoadFromMemory (config, fallback, FcFalse))
         goto bail1;
     if (androidAppCacheDir && !FcConfigAddCacheDir (config, (FcChar8 *) androidAppCacheDir))
         goto bail1;
