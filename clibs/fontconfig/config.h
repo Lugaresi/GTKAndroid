@@ -79,10 +79,10 @@
 /* #undef HAVE_FT_DONE_MM_VAR */
 
 /* Define to 1 if you have the `FT_Get_BDF_Property' function. */
-#define HAVE_FT_GET_BDF_PROPERTY 1
+/* undef HAVE_FT_GET_BDF_PROPERTY */
 
 /* Define to 1 if you have the `FT_Get_PS_Font_Info' function. */
-#define HAVE_FT_GET_PS_FONT_INFO 1
+/* undef HAVE_FT_GET_PS_FONT_INFO */
 
 /* Define to 1 if you have the `FT_Get_X11_Font_Format' function. */
 #define HAVE_FT_GET_X11_FONT_FORMAT 1
