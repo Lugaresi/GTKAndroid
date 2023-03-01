@@ -315,9 +315,9 @@ def run():
     dl.download("fontconfig/distsrc", "https://www.freedesktop.org/software/fontconfig/release/fontconfig-2.14.2.tar.xz")
     makeVariablesFile("fontconfig/distsrc/src/Makefile.in", "fontconfig/distsrc/src/Makefile.sources",
                       ["libfontconfig_la_SOURCES"])
-    dl.download("harfbuzz/distsrc", "http://www.freedesktop.org/software/harfbuzz/release/harfbuzz-0.9.36.tar.bz2") 
+    dl.download("harfbuzz/distsrc", "https://github.com/harfbuzz/harfbuzz/releases/download/7.0.1/harfbuzz-7.0.1.tar.xz")
     makeVariablesFile("harfbuzz/distsrc/src/Makefile.in", "harfbuzz/distsrc/src/Makefile.sources",
-                      ["HBSOURCES"])
+                      ["HB_BASE_sources", "HB_GLIB_sources", "HB_FT_sources"])
 
     # libintl ( GDB comes with a self contained version)
     dl.download("libintl/distsrc", "https://ftp.gnu.org/gnu/gdb/gdb-13.1.tar.xz")
