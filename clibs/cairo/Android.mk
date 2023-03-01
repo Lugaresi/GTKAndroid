@@ -26,10 +26,7 @@ LIBPIXMAN_CFLAGS = -D_USE_MATH_DEFINES -DPIXMAN_NO_TLS -DPACKAGE="android-cairo"
 export CAIRO_CFLAGS := -DCAIRO_HAS_GOBJECT_FUNCTIONS=1
 
 LIBCAIRO_CFLAGS:= $(LIBPIXMAN_CFLAGS) $(CAIRO_CFLAGS)               \
-    -DPACKAGE_VERSION="\"android-cairo\""                           \
-    -DPACKAGE_BUGREPORT="\"http://github.com/anoek/android-cairo\"" \
-    -DCAIRO_NO_MUTEX=1 -DHAVE_UINT64_T=1                            \
-    -DHAVE_STDINT_H -Wno-attributes
+                  -Wno-attributes
 
 include $(CAIRO_SOURCES_PATH)/src/Makefile.sources
 include $(PIXMAN_SOURCES_PATH)/pixman/Makefile.sources
@@ -52,9 +49,9 @@ LOCAL_CFLAGS    := -O2 $(LIBCAIRO_CFLAGS) -I$(PIXMAN_SOURCES_PATH)/pixman \
 LOCAL_SRC_FILES := cairo/util/cairo-gobject/cairo-gobject-enums.c \
                    cairo/util/cairo-gobject/cairo-gobject-structs.c \
                    $(addprefix pixman/pixman/, $(libpixman_sources)) \
-                   $(addprefix cairo/src/, $(cairo_sources) $(cairo_gl_sources) $(cairo_egl_sources) \
-                                           $(cairo_ft_sources))
-LOCAL_C_INCLUDES := $(GLIB_INCLUDES) $(LOCAL_PATH)/glib/glib \
+                   $(addprefix cairo/src/, $(cairo_sources) $(cairo_glesv2_sources) $(cairo_egl_sources) \
+                                           $(cairo_ft_sources) $(cairo_svg_sources) $(cairo_pdf_sources) $(cairo_ps_sources))
+LOCAL_C_INCLUDES := $(MAKEFILE_PATH) $(GLIB_INCLUDES) $(LOCAL_PATH)/glib/glib \
                     $(FONTCONFIG_INCLUDES) $(FREETYPE_INCLUDES) \
                     $(NDK_ROOT)/sources/android/support/include \
                     $(NDK_ROOT)/sources/android/support/src/musl-locale

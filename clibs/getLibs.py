@@ -332,8 +332,8 @@ def run():
                       ["libexpatinternal_la_SOURCES"])
     # cairo & pixman
     print ("Please be aware that downloading files from cairographics.org can take REALLY LONG TIME (up to 20-25 minutes)")
-    dl.download("cairo/distsrc/cairo", "http://cairographics.org/releases/cairo-1.14.0.tar.xz")
-    dl.download("cairo/distsrc/pixman", "http://cairographics.org/releases/pixman-0.32.6.tar.gz")
+    dl.download("cairo/distsrc/cairo", "https://gitlab.freedesktop.org/cairo/cairo/-/archive/1.17.6/cairo-1.17.6.tar.bz2")
+    dl.download("cairo/distsrc/pixman", "https://www.cairographics.org/releases/pixman-0.42.2.tar.gz")
 
 if __name__ == "__main__":
     run()
