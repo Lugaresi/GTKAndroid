@@ -26,13 +26,10 @@ LOCAL_SRC_FILES:= $(GMODULE_SOURCES)
 LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)
 LOCAL_CFLAGS += -DNVALGRIND=1
 LOCAL_C_INCLUDES := $(MAKEFILE_PATH) $(MAKEFILE_PATH)/../glib $(MAKEFILE_PATH)/include \
-                    $(GLIB_INCLUDES) \
-                    $(NDK_ROOT)/sources/android/support/include \
-                    $(NDK_ROOT)/sources/android/support/src/musl-locale
-LOCAL_STATIC_LIBRARIES := android_support pcre ffi
+                    $(GLIB_INCLUDES)
+LOCAL_STATIC_LIBRARIES := pcre ffi
 
 include $(BUILD_STATIC_LIBRARY)
 
-$(call import-module,android/support)
 $(call import-module,glib)
 $(call import-module,ffi)

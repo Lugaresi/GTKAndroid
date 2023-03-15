@@ -25,10 +25,9 @@ LOCAL_SRC_FILES  := $(filter %.cc, $(HB_BASE_sources)) $(filter %.cc, $(HB_GLIB_
 LOCAL_CFLAGS     += -DHAVE_CONFIG_H=1 -DHB_HAS_GLIB=1 -DHB_HAS_FREETYPE=1
 LOCAL_C_INCLUDES := $(MAKEFILE_PATH) $(FREETYPE_INCLUDES) $(GLIB_INCLUDES)
 
-LOCAL_STATIC_LIBRARIES := android_support glib freetype
+LOCAL_STATIC_LIBRARIES := glib freetype
 
 include $(BUILD_STATIC_LIBRARY)
 
-$(call import-module,android/support)
 $(call import-module,freetype)
 $(call import-module,glib)

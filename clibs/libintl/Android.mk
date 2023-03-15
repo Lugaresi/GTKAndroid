@@ -20,7 +20,6 @@ include $(LOCAL_PATH)/Sources.mk
 
 export LIBINTL_INCLUDES := $(MAKEFILE_PATH)/include
 
-
 LOCAL_MODULE     := libintl
 LOCAL_SRC_FILES  := $(filter %.c, $(SOURCES)) $(LOCAL_PATH)/plural.c
 LOCAL_CFLAGS     := -g -O2 -fvisibility=hidden -DHAVE_CONFIG_H

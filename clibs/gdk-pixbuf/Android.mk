@@ -31,14 +31,11 @@ LOCAL_CFLAGS += -DGDK_PIXBUF_COMPILATION=1 -DGDK_PIXBUF_ENABLE_BACKEND=1 -DNVALG
                 -DGDK_PIXBUF_LIBDIR=\"unknown-libdir-in-Android.mk\" \
                 -DGDK_PIXBUF_LOCALEDIR=\".\"
 LOCAL_C_INCLUDES := $(MAKEFILE_PATH) $(MAKEFILE_PATH)/include $(GDK_PIXBUG_SOURCES_PATH) \
-                    $(GLIB_INCLUDES) $(LIBINTL_INCLUDES) \
-                    $(NDK_ROOT)/sources/android/support/include \
-                    $(NDK_ROOT)/sources/android/support/src/musl-locale
+                    $(GLIB_INCLUDES) $(LIBINTL_INCLUDES)
 LOCAL_STATIC_LIBRARIES := gmodule
 
 export GDK_PIXBUG_INCLUDES := $(GDK_PIXBUG_SOURCES_PATH)
 
 include $(BUILD_STATIC_LIBRARY)
 
-$(call import-module,android/support)
 $(call import-module,gmodule)

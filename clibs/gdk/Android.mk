@@ -30,17 +30,14 @@ LOCAL_EXPORT_LDLIBS := -llog
 LOCAL_CFLAGS += -DNVALGRIND=1 -DGDK_COMPILATION=1 $(CAIRO_CFLAGS)
 LOCAL_C_INCLUDES := $(MAKEFILE_PATH) $(MAKEFILE_PATH)/include $(MAKEFILE_PATH)/include/gdk $(MAKEFILE_PATH)/../gtk \
                     $(GTK_SOURCES_PATH) $(GDK_PIXBUG_INCLUDES) $(GLIB_INCLUDES) $(LIBINTL_INCLUDES) \
-                    $(PANGO_INCLUDES) $(CAIRO_INCLUDES) $(FONTCONFIG_INCLUDES) \
-                    $(NDK_ROOT)/sources/android/support/include \
-                    $(NDK_ROOT)/sources/android/support/src/musl-locale
-LOCAL_STATIC_LIBRARIES := android_support android_native_app_glue \
+                    $(PANGO_INCLUDES) $(CAIRO_INCLUDES) $(FONTCONFIG_INCLUDES)
+LOCAL_STATIC_LIBRARIES := android_native_app_glue \
                           glib gio gobject gmodule fontconfig pango cairo gdk-pixbuf
 
 export GDK_INCLUDES := $(LOCAL_PATH) $(MAKEFILE_PATH)/include
 
 include $(BUILD_STATIC_LIBRARY)
 
-$(call import-module,android/support)
 $(call import-module,glib)
 $(call import-module,gio)
 $(call import-module,gobject)

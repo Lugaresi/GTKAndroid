@@ -27,9 +27,7 @@ LOCAL_MODULE:= glib
 LOCAL_SRC_FILES:= $(GLIB_CORE_SOURCES) $(GNULIB_SOURCES) $(CHARSET_SOURCES) $(MAKEFILE_PATH)/iconv.cpp
 LOCAL_CFLAGS += -DGLIB_COMPILATION=1 -DNVALGRIND=1
 LOCAL_EXPORT_LDLIBS := -lz
-LOCAL_C_INCLUDES := $(MAKEFILE_PATH) $(MAKEFILE_PATH)/include $(GLIB_SOURCES_PATH) \
-					$(MAKEFILE_PATH)/../libintl/include \
-                    $(NDK_ROOT)/sources/android/support/src/musl-locale
+LOCAL_C_INCLUDES := $(MAKEFILE_PATH) $(MAKEFILE_PATH)/include $(GLIB_SOURCES_PATH) $(LIBINTL_INCLUDES)
 LOCAL_STATIC_LIBRARIES := android_support pcre
 
 export GLIB_INCLUDES := $(MAKEFILE_PATH)/include $(GLIB_SOURCES_PATH) \
@@ -38,4 +36,5 @@ export GLIB_INCLUDES := $(MAKEFILE_PATH)/include $(GLIB_SOURCES_PATH) \
 include $(BUILD_STATIC_LIBRARY)
 
 $(call import-module,android/support)
+$(call import-module,libintl)
 $(call import-module,pcre)

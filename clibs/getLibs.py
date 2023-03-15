@@ -253,7 +253,7 @@ def run():
                 "platform_external_libffi-android-9.0.0_r47")
 
     # glib, gobject, gio
-    dl.download("glib/distsrc", "http://ftp.gnome.org/pub/gnome/sources/glib/2.40/glib-2.40.2.tar.xz")
+    dl.download("glib/distsrc", "http://ftp.gnome.org/pub/gnome/sources/glib/2.58/glib-2.58.3.tar.xz")
     makeVariablesFile("glib/distsrc/glib/Makefile.in", "glib/distsrc/glib/Sources.mk",
                       ["@OS_UNIX_TRUE@am__append_16",
                        "@THREADS_POSIX_TRUE@@THREADS_WIN32_FALSE@am__append_18",

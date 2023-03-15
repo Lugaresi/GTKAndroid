@@ -52,10 +52,8 @@ LOCAL_SRC_FILES := cairo/util/cairo-gobject/cairo-gobject-enums.c \
                    $(addprefix cairo/src/, $(cairo_sources) $(cairo_glesv2_sources) $(cairo_egl_sources) \
                                            $(cairo_ft_sources) $(cairo_svg_sources) $(cairo_pdf_sources) $(cairo_ps_sources))
 LOCAL_C_INCLUDES := $(MAKEFILE_PATH) $(GLIB_INCLUDES) $(LOCAL_PATH)/glib/glib \
-                    $(FONTCONFIG_INCLUDES) $(FREETYPE_INCLUDES) \
-                    $(NDK_ROOT)/sources/android/support/include \
-                    $(NDK_ROOT)/sources/android/support/src/musl-locale
-LOCAL_STATIC_LIBRARIES := cpufeatures glib fontconfig freetype
+                    $(FONTCONFIG_INCLUDES) $(FREETYPE_INCLUDES)
+LOCAL_STATIC_LIBRARIES := glib fontconfig freetype
 
 export CAIRO_INCLUDES := $(MAKEFILE_PATH)/cairo-extra $(MAKEFILE_PATH)/pixman-extra \
                          $(CAIRO_SOURCES_PATH)/src $(PIXMAN_SOURCES_PATH)/pixman \
@@ -63,7 +61,6 @@ export CAIRO_INCLUDES := $(MAKEFILE_PATH)/cairo-extra $(MAKEFILE_PATH)/pixman-ex
 
 include $(BUILD_STATIC_LIBRARY)
 
-$(call import-module,android/cpufeatures)
 $(call import-module,glib)
 $(call import-module,freetype)
 $(call import-module,fontconfig)

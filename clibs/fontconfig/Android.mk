@@ -28,11 +28,10 @@ LOCAL_SRC_FILES  := $(addprefix src/, $(filter %.c, $(libfontconfig_la_SOURCES))
 LOCAL_CFLAGS     += -DHAVE_CONFIG_H=1
 LOCAL_C_INCLUDES := $(MAKEFILE_PATH) $(FREETYPE_INCLUDES) $(EXPAT_INCLUDES) $(LIBINTL_INCLUDES)
 
-LOCAL_STATIC_LIBRARIES := android_support freetype
+LOCAL_STATIC_LIBRARIES := freetype
 
 include $(BUILD_STATIC_LIBRARY)
 
-$(call import-module,android/support)
 $(call import-module,freetype)
 $(call import-module,expat)
 $(call import-module,libintl)

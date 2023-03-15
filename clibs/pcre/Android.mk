@@ -23,10 +23,6 @@ LOCAL_MODULE:= pcre
 LOCAL_SRC_FILES:= $(filter %.c, $(libpcre_la_SOURCES))
 LOCAL_CFLAGS += $(libpcre_la_CPPFLAGS) -DNVALGRIND=1
 LOCAL_C_INCLUDES := $(GLIB_SOURCES_PATH) $(GLIB_SOURCES_PATH)/glib  \
-                    $(MAKEFILE_PATH)/../glib $(MAKEFILE_PATH)/../glib/include \
-                    $(NDK_ROOT)/sources/android/support/include \
-                    $(NDK_ROOT)/sources/android/support/src/musl-locale
-LOCAL_STATIC_LIBRARIES := android_support
+                    $(MAKEFILE_PATH)/../glib $(MAKEFILE_PATH)/../glib/include
 
 include $(BUILD_STATIC_LIBRARY)
-$(call import-module,android/support)

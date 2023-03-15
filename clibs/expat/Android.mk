@@ -25,8 +25,4 @@ LOCAL_MODULE     := expat
 LOCAL_SRC_FILES  := $(libexpatinternal_la_SOURCES)
 LOCAL_C_INCLUDES := $(MAKEFILE_PATH) $(LOCAL_PATH)
 
-LOCAL_STATIC_LIBRARIES := android_support
-
 include $(BUILD_STATIC_LIBRARY)
-
-$(call import-module,android/support)

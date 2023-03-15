@@ -47,9 +47,7 @@ LOCAL_CFLAGS += -DGTK_COMPILATION=1 -DNVALGRIND=1 -DGTK_VERSION=\"$(GTK_VERSION)
 LOCAL_C_INCLUDES := $(MAKEFILE_PATH) $(MAKEFILE_PATH)/include $(GTK_SOURCES_PATH) $(LIBINTL_INCLUDES) \
                     $(GLIB_INCLUDES) $(PANGO_INCLUDES) $(CAIRO_INCLUDES) \
                     $(GDK_PIXBUG_INCLUDES) $(ATK_INCLUDES) \
-                    $(GDK_INCLUDES) \
-                    $(NDK_ROOT)/sources/android/support/include \
-                    $(NDK_ROOT)/sources/android/support/src/musl-locale
+                    $(GDK_INCLUDES)
 LOCAL_SRC_FILES:= $(GTK_SOURCES)
 LOCAL_STATIC_LIBRARIES := android_support android_native_app_glue glib gobject gmodule \
                           pango cairo gdk-pixbuf atk gdk
