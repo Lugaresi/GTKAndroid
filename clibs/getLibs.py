@@ -284,7 +284,7 @@ def run():
                       ["libpango_1_0_la_SOURCES", "pango_headers", "pangoft2_public_sources", "pangocairo_core_sources"])
 
     # atk
-    dl.download("atk/distsrc", "http://ftp.gnome.org/pub/gnome/sources/atk/2.13/atk-2.13.90.tar.xz")
+    dl.download("atk/distsrc", "http://ftp.gnome.org/pub/gnome/sources/atk/2.28/atk-2.28.0.tar.xz")
     makeVariablesFile("atk/distsrc/atk/Makefile.in", "atk/distsrc/atk/Sources.mk",
                       ["atk_sources",
                        "libatk_1_0_la_SOURCES",
