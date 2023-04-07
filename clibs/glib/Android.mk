@@ -19,7 +19,7 @@ include $(CLEAR_VARS)
 
 include $(LOCAL_PATH)/Sources.mk
 
-GNULIB_SOURCES = $(addprefix gnulib/, vasnprintf.c printf-parse.c printf-args.c printf.c asnprintf.c)
+GNULIB_SOURCES = $(addprefix gnulib/, vasnprintf.c printf-parse.c printf-args.c printf.c asnprintf.c) $(MAKEFILE_PATH)/wctomb.c
 CHARSET_SOURCES = libcharset/localcharset.c
 GLIB_CORE_SOURCES = $(filter %.c, $(libglib_2_0_la_SOURCES)) gspawn.c giounix.c
 

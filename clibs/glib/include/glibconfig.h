@@ -140,8 +140,8 @@ typedef unsigned __int64 guintptr;
 #define g_memmove(dest,src,len) G_STMT_START { memmove ((dest), (src), (len)); } G_STMT_END
 
 #define GLIB_MAJOR_VERSION 2
-#define GLIB_MINOR_VERSION 40
-#define GLIB_MICRO_VERSION 2
+#define GLIB_MINOR_VERSION 56
+#define GLIB_MICRO_VERSION 4
 
 #define __GCC_HAVE_SYNC_COMPARE_AND_SWAP_4 1
 
@@ -160,8 +160,6 @@ typedef unsigned __int64 guintptr;
 #define G_HAVE___INLINE__ 1
 #endif /* !_MSC_VER and !__DMC__ */
 #endif  /* !__cplusplus */
-
-#define G_CAN_INLINE    1
 
 #ifndef _MSC_VER
 #define G_HAVE_ISO_VARARGS 1
@@ -235,6 +233,11 @@ typedef int GPid;
 #define GLIB_SYSDEF_MSG_OOB       1
 #define GLIB_SYSDEF_MSG_PEEK      2
 #define GLIB_SYSDEF_MSG_DONTROUTE 4
+
+#define G_DIR_SEPARATOR '/'
+#define G_DIR_SEPARATOR_S "/"
+#define G_SEARCHPATH_SEPARATOR ':'
+#define G_SEARCHPATH_SEPARATOR_S ":"
 
 G_END_DECLS
 

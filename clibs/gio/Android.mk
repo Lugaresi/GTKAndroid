@@ -26,12 +26,13 @@ unix_sources := gfiledescriptorbased.c                  \
                 gunixfdlist.c                           \
                 gunixfdmessage.c                        \
                 gunixsocketaddress.c                    \
+                gunixvolume.c                           \
                 gunixinputstream.c                      \
                 gunixoutputstream.c                     \
                 gcontenttype.c                          \
-                gcontenttypeprivate.h                   \
                 gfdonotificationbackend.c               \
                 ggtknotificationbackend.c               \
+                gnetworkmonitornetlink.c                \
                 gdesktopappinfo.c
 
 

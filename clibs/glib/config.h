@@ -32,3 +32,5 @@
 // to prevent $(NDK_ROOT)/platforms/android-XX/<target>/usr/include/alloca.h
 // from loading as galloca.h has this definition already
 #define _ALLOCA_H
+
+#define GLIB_CHARSETALIAS_DIR "/system/lib"

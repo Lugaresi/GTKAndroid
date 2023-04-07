@@ -253,7 +253,7 @@ def run():
                 "platform_external_libffi-android-9.0.0_r47")
 
     # glib, gobject, gio
-    dl.download("glib/distsrc", "http://ftp.gnome.org/pub/gnome/sources/glib/2.58/glib-2.58.3.tar.xz")
+    dl.download("glib/distsrc", "http://ftp.gnome.org/pub/gnome/sources/glib/2.56/glib-2.56.4.tar.xz")
     makeVariablesFile("glib/distsrc/glib/Makefile.in", "glib/distsrc/glib/Sources.mk",
                       ["@OS_UNIX_TRUE@am__append_16",
                        "@THREADS_POSIX_TRUE@@THREADS_WIN32_FALSE@am__append_18",
@@ -264,7 +264,7 @@ def run():
     makeVariablesFile("glib/distsrc/gobject/Makefile.in", "glib/distsrc/gobject/Sources.mk",
                       ["gobject_c_sources"])
     makeVariablesFile("glib/distsrc/gio/Makefile.in", "glib/distsrc/gio/Sources.mk",
-                      ["settings_sources", "application_sources", "gdbus_sources", 
+                      ["settings_base_sources", "settings_sources", "application_sources", "gdbus_sources", "gio_base_sources",
                        "@OS_UNIX_TRUE@unix_sources", "local_sources", "libgio_2_0_la_SOURCES"])
     makeVariablesFile("glib/distsrc/gio/xdgmime/Makefile.in", "glib/distsrc/gio/xdgmime/Sources.mk", ["libxdgmime_la_SOURCES"])                       
     makeVariablesFile("glib/distsrc/gmodule/Makefile.in", "glib/distsrc/gmodule/Sources.mk",

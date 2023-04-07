@@ -14,11 +14,12 @@
 
 #include "config.h"
 
-#include "glocaldirectorymonitor.h"
 #include "gunixvolumemonitor.h"
 #include "gunixmounts.h"
 #include "giomodule-priv.h"
 #include "gfile.h"
+#include "gportalsupport.h"
+#include "gopenuriportal.h"
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // unix mounts
@@ -57,30 +58,6 @@ void g_unix_mount_free(GUnixMountEntry *mount_entry)
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
-// GLocalDirectoryMonitor
-
-G_DEFINE_TYPE(GLocalDirectoryMonitor, g_local_directory_monitor, G_TYPE_LOCAL_DIRECTORY_MONITOR)
-
-static void g_local_directory_monitor_class_init(GLocalDirectoryMonitorClass *klass)
-{
-}
-
-static void g_local_directory_monitor_init(GLocalDirectoryMonitor *obj)
-{
-}
-
-GFileMonitor *_g_local_directory_monitor_new(const char *dirname, GFileMonitorFlags flags,
-                                             GMainContext *context, gboolean is_remote_fs,
-                                             gboolean do_start, GError **error)
-{
-    return G_FILE_MONITOR(g_object_new(G_TYPE_LOCAL_DIRECTORY_MONITOR, NULL));
-}
-
-void g_local_directory_monitor_start(GLocalDirectoryMonitor *local_monitor)
-{
-}
-
-///////////////////////////////////////////////////////////////////////////////////////
 // GUnixVolumeMonitor
 
 struct _GUnixVolumeMonitor {
@@ -95,4 +72,61 @@ static void _g_unix_volume_monitor_class_init(GUnixVolumeMonitorClass *klass)
 
 static void _g_unix_volume_monitor_init(GUnixVolumeMonitor *obj)
 {
+}
+
+/* XDG Stuff */
+int glib_should_use_portal() {
+	return 0;
+}
+
+gboolean
+g_openuri_portal_open_uri (const char  *uri,
+                           const char  *parent_window,
+                           GError     **error)
+{
+	return FALSE;
+}
+
+void
+g_openuri_portal_open_uri_async (const char          *uri,
+                                 const char          *parent_window,
+                                 GCancellable        *cancellable,
+                                 GAsyncReadyCallback  callback,
+                                 gpointer             user_data)
+{
+}
+
+gboolean
+g_openuri_portal_open_uri_finish (GAsyncResult  *result,
+                                  GError       **error)
+{
+  return FALSE;
+}
+
+GType g_portal_notification_backend_get_type (void)
+{
+	return G_TYPE_INVALID;
+}
+
+GType g_proxy_resolver_portal_get_type (void)
+{
+	return G_TYPE_INVALID;
+}
+
+GType g_network_monitor_portal_get_type (void)
+{
+	return G_TYPE_INVALID;
+}
+
+GList * g_document_portal_add_documents (GList       *uris,
+                                         const char  *app_id,
+                                         GError     **error)
+{
+	return NULL;
+}
+
+GUnixMountMonitor *
+g_unix_mount_monitor_get (void)
+{
+  return NULL;
 }
