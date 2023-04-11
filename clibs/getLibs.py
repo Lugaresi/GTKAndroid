@@ -291,7 +291,7 @@ def run():
                        "atk_headers"])
 
     # gdk-pixbuf
-    dl.download("gdk-pixbuf/distsrc", "http://ftp.gnome.org/pub/gnome/sources/gdk-pixbuf/2.31/gdk-pixbuf-2.31.1.tar.xz")
+    dl.download("gdk-pixbuf/distsrc", "http://ftp.gnome.org/pub/gnome/sources/gdk-pixbuf/2.36/gdk-pixbuf-2.36.11.tar.xz")
     makeVariablesFile("gdk-pixbuf/distsrc/gdk-pixbuf/Makefile.in", "gdk-pixbuf/distsrc/gdk-pixbuf/Sources.mk",
                       ["libgdk_pixbuf_2_0_la_SOURCES"])
     makeVariablesFile("gdk-pixbuf/distsrc/configure", "gdk-pixbuf/distsrc/Config.mk",

@@ -23,7 +23,7 @@ include $(GDK_PIXBUG_SOURCES_PATH)/Config.mk
 PIXOPS_SOURCES = pixops/pixops.c
 
 LOCAL_MODULE:= gdk-pixbuf
-LOCAL_SRC_FILES:= $(filter %.c, $(libgdk_pixbuf_2_0_la_SOURCES)) $(PIXOPS_SOURCES) io-pixdata.c
+LOCAL_SRC_FILES:= $(filter %.c, $(libgdk_pixbuf_2_0_la_SOURCES)) $(PIXOPS_SOURCES) gdk-pixbuf-pixdata.c
 LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)
 LOCAL_CFLAGS += -DGDK_PIXBUF_COMPILATION=1 -DGDK_PIXBUF_ENABLE_BACKEND=1 -DNVALGRIND=1 \
                 -DGDK_PIXBUF_BINARY_VERSION=\"$(GDK_PIXBUF_BINARY_VERSION)\" \
