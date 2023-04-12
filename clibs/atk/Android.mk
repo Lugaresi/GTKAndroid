@@ -20,15 +20,17 @@ include $(CLEAR_VARS)
 include $(LOCAL_PATH)/Sources.mk
 
 LOCAL_MODULE:= atk
-LOCAL_SRC_FILES:= $(filter %.c, $(libatk_1_0_la_SOURCES)) $(MAKEFILE_PATH)/atk/atkmarshal.c
+# We need to manually add what has not been updated in makefile.msc
+LOCAL_SRC_FILES:=  $(atk_sources) \
+                   $(MAKEFILE_PATH)/atk/atkmarshal.c $(MAKEFILE_PATH)/atk/atk-enum-types.c
 LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)
 LOCAL_CFLAGS += -DNVALGRIND=1 -DATK_COMPILATION=1 -DATK_DISABLE_DEPRECATION_WARNINGS=1 \
                 -DGLIB_DISABLE_DEPRECATION_WARNINGS=1
-LOCAL_C_INCLUDES = $(MAKEFILE_PATH) $(MAKEFILE_PATH)/atk $(ATK_SOURCES_PATH) \
+LOCAL_C_INCLUDES = $(MAKEFILE_PATH) $(MAKEFILE_PATH)/atk $(MAKEFILE_PATH)/include $(MAKEFILE_PATH)/include/atk $(ATK_SOURCES_PATH) \
                     $(GLIB_INCLUDES) $(LIBINTL_INCLUDES)
 LOCAL_STATIC_LIBRARIES := glib gobject
 
-export ATK_INCLUDES := $(ATK_SOURCES_PATH)
+export ATK_INCLUDES := $(ATK_SOURCES_PATH) $(MAKEFILE_PATH)/include
 
 include $(BUILD_STATIC_LIBRARY)
 

@@ -237,6 +237,45 @@ def makeVariablesFile(makefileName, outputName, variableNames):
                 f.write(" " * len(varName) + "   %-40s\n" % vals[-1])
             f.write("\n")
 
+def mesonVariablesFile(makefileName, outputName, variableNames):
+    """Parses makefileName and extracts all the specified variables into a separate file"""
+    print ("Extracting some variables from %s into %s" % (makefileName, outputName))
+    allVars = {}
+    incompleteVar = None
+    # parse and extract all the variables
+    with open(os.path.join(EXTLIBS_PATH, makefileName)) as f:
+        for line in f.readlines():
+            if incompleteVar:
+                line = line.strip()
+                if line.endswith("]"):
+                    allVars[incompleteVar] += " " + line[:-1]
+                    incompleteVar = None
+                else:
+                    allVars[incompleteVar] += " " + line.replace('\'','').replace(',','')
+            else:
+                mo = varStartRe.match(line)
+                if mo:
+                    varName, var = mo.groups()
+                    var = var.strip()
+                    if var.endswith("["):
+                        var = var[:-1]
+                        incompleteVar = varName
+                    allVars[varName] = var
+    # form output file
+    with open(os.path.join(EXTLIBS_PATH, outputName), "w") as f:
+        for varName in variableNames:
+            vals = allVars[varName].split()
+            if "@" in varName:
+                varName = varName.split("@")[-1]  # hide automake artifacts
+            if len(vals) == 1:
+                f.write("%s = %s\n" % (varName, vals[0]))
+            else:
+                vals = [val for val in vals if not val.startswith("@")]
+                f.write("%s = %-40s\\\n" % (varName, vals[0]))
+                for val in vals[1:-1]:
+                    f.write(" " * len(varName) + "   %-40s\\\n" % val)
+                f.write(" " * len(varName) + "   %-40s\n" % vals[-1])
+            f.write("\n")
 
 def run():
     """Main script entry point"""
@@ -284,10 +323,9 @@ def run():
                       ["libpango_1_0_la_SOURCES", "pango_headers", "pangoft2_public_sources", "pangocairo_core_sources"])
 
     # atk
-    dl.download("atk/distsrc", "http://ftp.gnome.org/pub/gnome/sources/atk/2.28/atk-2.28.0.tar.xz")
-    makeVariablesFile("atk/distsrc/atk/Makefile.in", "atk/distsrc/atk/Sources.mk",
+    dl.download("atk/distsrc", "http://ftp.gnome.org/pub/gnome/sources/atk/2.35/atk-2.35.1.tar.xz")
+    mesonVariablesFile("atk/distsrc/atk/meson.build", "atk/distsrc/atk/Sources.mk",
                       ["atk_sources",
-                       "libatk_1_0_la_SOURCES",
                        "atk_headers"])
 
     # gdk-pixbuf

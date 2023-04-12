@@ -2,7 +2,9 @@
 // to obtain some invariants (like GLIB_*_VERSION)
 
 #undef _ATK_EXTERN
-#include "config.h.win32"
+
+#define VERSION "2.35.1"
+#define GETTEXT_PACKAGE "atk10"
 
 // now we make some overrides
 
