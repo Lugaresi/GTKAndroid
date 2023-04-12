@@ -253,7 +253,7 @@ def mesonVariablesFile(makefileName, outputName, variableNames):
                 else:
                     allVars[incompleteVar] += " " + line.replace('\'','').replace(',','')
             else:
-                mo = varStartRe.match(line)
+                mo = varStartRe.match(line.strip())
                 if mo:
                     varName, var = mo.groups()
                     var = var.strip()
@@ -317,10 +317,15 @@ def run():
     #                   "libgirepository_internals_la_SOURCES",
     #                   "libgirepository_1_0_la_SOURCES"])
 
+    # fribidi
+    dl.download("fribidi/distsrc", "https://github.com/fribidi/fribidi/releases/download/v1.0.12/fribidi-1.0.12.tar.xz")
+    mesonVariablesFile("fribidi/distsrc/lib/meson.build", "fribidi/distsrc/lib/Sources.mk",
+                      ["fribidi_sources"])
     # pango
-    dl.download("pango/distsrc", "http://ftp.gnome.org/pub/gnome/sources/pango/1.36/pango-1.36.8.tar.xz")
-    makeVariablesFile("pango/distsrc/pango/Makefile.in", "pango/distsrc/pango/Sources.mk",
-                      ["libpango_1_0_la_SOURCES", "pango_headers", "pangoft2_public_sources", "pangocairo_core_sources"])
+    dl.download("pango/distsrc", "http://ftp.gnome.org/pub/gnome/sources/pango/1.48/pango-1.48.11.tar.xz")
+    mesonVariablesFile("pango/distsrc/pango/meson.build", "pango/distsrc/pango/Sources.mk",
+                      ["pango_sources", "pango_headers", "pangofc_public_sources", 
+                       "pangoot_public_sources", "pangoft2_public_sources", "pangocairo_sources"])
 
     # atk
     dl.download("atk/distsrc", "http://ftp.gnome.org/pub/gnome/sources/atk/2.35/atk-2.35.1.tar.xz")

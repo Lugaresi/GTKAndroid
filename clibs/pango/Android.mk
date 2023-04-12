@@ -19,31 +19,28 @@ include $(CLEAR_VARS)
 
 include $(LOCAL_PATH)/Sources.mk
 
-freebidi_sources = mini-fribidi/fribidi.c mini-fribidi/fribidi_char_type.c mini-fribidi/fribidi_types.c
-
-fc_support_sources = pangocairo-fcfont.c pangocairo-fcfontmap.c ../../module-defs-fc.c \
-                     ../modules/basic/basic-fc.c
+fc_support_sources = pangocairo-fcfont.c pangocairo-fcfontmap.c ../../pango-enum-types.c
 
 LOCAL_MODULE    := pango
-LOCAL_SRC_FILES := $(fc_support_sources) $(freebidi_sources) $(pangoft2_public_sources) \
-                   $(filter %.c, $(libpango_1_0_la_SOURCES) $(pangocairo_core_sources))
+LOCAL_SRC_FILES := $(fc_support_sources) $(pangoft2_public_sources) ../../glib-compat.c \
+                   $(pango_sources) $(pangofc_public_sources) $(pangoot_public_sources) $(pangocairo_sources)
 LOCAL_CFLAGS += -DPANGO_ENABLE_ENGINE=1 -DPANGO_ENABLE_BACKEND=1 -DNVALGRIND=1 \
-                -DSYSCONFDIR=\"/etc/xdg\" -DLIBDIR=\"unknown-libdir-in-Android.mk\" \
-                -DPANGO_MODULE_PREFIX=_pango_basic_fc
-LOCAL_C_INCLUDES = $(MAKEFILE_PATH) $(MAKEFILE_PATH)/include \
-                   $(PANGO_SOURCES_PATH) $(GLIB_INCLUDES) \
+                -DSYSCONFDIR=\"/etc/xdg\" -DLIBDIR=\"unknown-libdir-in-Android.mk\"
+LOCAL_C_INCLUDES = $(MAKEFILE_PATH) $(MAKEFILE_PATH)/include $(MAKEFILE_PATH)/include/pango \
+                   $(PANGO_SOURCES_PATH) $(GLIB_INCLUDES) $(FRIBIDI_INCLUDES) \
                    $(FONTCONFIG_INCLUDES) $(FREETYPE_INCLUDES) $(HARFBUZZ_INCLUDES) \
                    $(MAKEFILE_PATH)/../cairo/distsrc/cairo/src \
                    $(MAKEFILE_PATH)/../cairo/cairo-extra
-LOCAL_STATIC_LIBRARIES := glib cairo fontconfig freetype harfbuzz
+LOCAL_STATIC_LIBRARIES := glib cairo fontconfig freetype harfbuzz fribidi
 
-export PANGO_INCLUDES := $(MAKEFILE_PATH)/include $(PANGO_SOURCES_PATH) \
+export PANGO_INCLUDES := $(MAKEFILE_PATH)/include $(PANGO_SOURCES_PATH) $(HARFBUZZ_INCLUDES) \
                          $(LOCAL_PATH)
 
 include $(BUILD_STATIC_LIBRARY)
 
 $(call import-module,glib)
 $(call import-module,cairo)
+$(call import-module,fribidi)
 $(call import-module,fontconfig)
 $(call import-module,freetype)
 $(call import-module,harfbuzz)
