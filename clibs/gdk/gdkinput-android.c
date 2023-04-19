@@ -321,9 +321,7 @@ void gdk_android_input_init(GdkDisplay *display)
                                   NULL);
     display->device_manager = GDK_DEVICE_MANAGER(device_manager);
 
-    display->core_pointer = device_manager->pointer;
-
-    _gdk_input_devices = g_list_append(NULL, display->core_pointer);
+    _gdk_input_devices = g_list_append(NULL, (device_manager)->pointer);
 }
 
 static void gdk_android_queue_event(GdkEvent *event)

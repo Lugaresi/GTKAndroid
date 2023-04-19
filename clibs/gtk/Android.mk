@@ -18,17 +18,15 @@ LOCAL_PATH:= $(GTK_SOURCES_PATH)/gtk
 include $(CLEAR_VARS)
 
 include $(LOCAL_PATH)/Sources.mk
-include $(LOCAL_PATH)/a11y/Sources.mk
 include $(GTK_SOURCES_PATH)/Config.mk
 
-GTK_ANDROID_SOURCES := gtkainit.c gtkadummyobject.c gtkcssprovider_hack.c gtkandroidassets.c
+GTK_ANDROID_SOURCES := gtkainit.c gtkadummyobject.c gtkcssprovider_hack.c gtkandroidassets.c gtkmarshalers.c gtktypebuiltins.c gtkprivatetypebuiltins.c gtkresources.c
 GTK_ANDROID_SOURCES := $(addprefix ../../, $(GTK_ANDROID_SOURCES))
 
 GTK_SOURCES = $(GTK_ANDROID_SOURCES) \
-              gtkwin32theme.c gtkcssimagewin32.c  \
-              $(addprefix a11y/, $(gtka11y_c_sources)) \
+              gtkwin32theme.c gtkwin32draw.c gtkcssimagewin32.c  \
               $(filter-out gtkmountoperation% gtkprintoperation% \
-                           gtkcssprovider.c \
+                           gtkcssprovider.c gtksearchenginetracker3.c \
                            gtkplug.c gtksocket.c gtkxembed.c \
                            %quartz.c %win32.c %-x11.c %-wayland.c gtkwin32% \
                            gtkapplication-dbus.c gtkapplication-quartz-menu.c \
@@ -36,8 +34,8 @@ GTK_SOURCES = $(GTK_ANDROID_SOURCES) \
 
 
 export GTK_INCLUDES = $(MAKEFILE_PATH)/include $(GTK_SOURCES_PATH) $(LIBINTL_INCLUDES) \
-                      $(GLIB_INCLUDES) $(PANGO_INCLUDES) $(CAIRO_INCLUDES) \
-                      $(GDK_PIXBUG_INCLUDES) $(ATK_INCLUDES) $(GDK_INCLUDES)
+                      $(GLIB_INCLUDES) $(FRIBIDI_INCLUDES) $(PANGO_INCLUDES) $(CAIRO_INCLUDES) \
+                      $(GDK_PIXBUG_INCLUDES) $(ATK_INCLUDES) $(EPOXY_INCLUDES) $(GDK_INCLUDES)
 
 LOCAL_MODULE := gtk
 LOCAL_CFLAGS += -DGTK_COMPILATION=1 -DNVALGRIND=1 -DGTK_VERSION=\"$(GTK_VERSION)\" \
@@ -45,12 +43,12 @@ LOCAL_CFLAGS += -DGTK_COMPILATION=1 -DNVALGRIND=1 -DGTK_VERSION=\"$(GTK_VERSION)
                 -DGTK_HOST=\"android\" -DGTK_BINARY_VERSION=\"$(GTK_BINARY_VERSION)\" \
                 $(CAIRO_CFLAGS)
 LOCAL_C_INCLUDES := $(MAKEFILE_PATH) $(MAKEFILE_PATH)/include $(GTK_SOURCES_PATH) $(LIBINTL_INCLUDES) \
-                    $(GLIB_INCLUDES) $(PANGO_INCLUDES) $(CAIRO_INCLUDES) \
-                    $(GDK_PIXBUG_INCLUDES) $(ATK_INCLUDES) \
+                    $(GLIB_INCLUDES) $(FRIBIDI_INCLUDES) $(PANGO_INCLUDES) $(CAIRO_INCLUDES) \
+                    $(GDK_PIXBUG_INCLUDES) $(ATK_INCLUDES) $(EPOXY_INCLUDES) \
                     $(GDK_INCLUDES)
 LOCAL_SRC_FILES:= $(GTK_SOURCES)
 LOCAL_STATIC_LIBRARIES := android_support android_native_app_glue glib gobject gmodule \
-                          pango cairo gdk-pixbuf atk gdk
+                          pango cairo gdk-pixbuf atk libepoxy gdk
 
 LOCAL_EXPORT_C_INCLUDES = $(GTK_INCLUDES)
 
@@ -60,8 +58,10 @@ $(call import-module,android/support)
 $(call import-module,android/native_app_glue)
 $(call import-module,glib)
 $(call import-module,gobject)
+$(call import-module,fribidi)
 $(call import-module,pango)
 $(call import-module,cairo)
+$(call import-module,libepoxy)
 $(call import-module,gdk-pixbuf)
 $(call import-module,atk)
 $(call import-module,gdk)

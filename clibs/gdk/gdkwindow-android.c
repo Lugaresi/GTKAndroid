@@ -17,6 +17,8 @@
 #include "config.h"
 #include <stdlib.h>
 
+#include <cairo-gl.h>
+
 #include <android_native_app_glue.h>
 
 #include "gdk.h"
@@ -180,14 +182,6 @@ static void gdk_android_window_destroy(GdkWindow *window,
     {
         window->destroyed = TRUE;
     }
-}
-
-static gboolean gdk_android_window_resize_cairo_surface(GdkWindow       *window,
-                                                        cairo_surface_t *surface,
-                                                        gint             width,
-                                                        gint             height)
-{
-    return FALSE;
 }
 
 static void gdk_android_window_destroy_foreign(GdkWindow *window)
@@ -726,14 +720,6 @@ static void gdk_android_window_set_functions (GdkWindow *window, GdkWMFunction f
     update_system_menu(window);
 }
 
-
-static gboolean gdk_android_window_set_static_gravities(GdkWindow *window, gboolean use_static)
-{
-    g_return_val_if_fail(GDK_IS_WINDOW(window), FALSE);
-
-    return !use_static;
-}
-
 static void gdk_android_window_begin_resize_drag(GdkWindow     *window,
                                                  GdkWindowEdge  edge,
                                                  GdkDevice     *device,
@@ -967,9 +953,8 @@ static cairo_region_t *gdk_android_window_get_shape(GdkWindow *window)
     return cairo_region_create_rectangle(&rect);
 }
 
-static gboolean _gdk_android_window_queue_antiexpose(GdkWindow *window, cairo_region_t *area)
+static void _gdk_android_window_queue_antiexpose(GdkWindow *window, cairo_region_t *area)
 {
-    return FALSE;
 }
 
 static void gdk_android_input_shape_combine_region(GdkWindow *window,
@@ -1087,7 +1072,10 @@ void _gdk_android_window_register_dnd(GdkWindow *window)
 
 GdkDragContext *_gdk_android_window_drag_begin(GdkWindow *window,
                                                GdkDevice *device,
-                                               GList     *targets)
+                                               GList     *targets,
+                                               gint       x_root,
+                                               gint       y_root)
+
 {
     return NULL;
 }
@@ -1167,11 +1155,9 @@ static void gdk_window_impl_android_class_init(GdkWindowImplAndroidClass *klass)
 
   impl_class->shape_combine_region = gdk_android_window_shape_combine_region;
   impl_class->input_shape_combine_region = gdk_android_input_shape_combine_region;
-  impl_class->set_static_gravities = gdk_android_window_set_static_gravities;
   impl_class->queue_antiexpose = _gdk_android_window_queue_antiexpose;
   impl_class->destroy = gdk_android_window_destroy;
   impl_class->destroy_foreign = gdk_android_window_destroy_foreign;
-  impl_class->resize_cairo_surface = gdk_android_window_resize_cairo_surface;
   impl_class->get_shape = gdk_android_window_get_shape;
   impl_class->end_paint = gdk_window_impl_android_end_paint;
 

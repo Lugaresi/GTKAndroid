@@ -342,16 +342,14 @@ def run():
                        "GDK_PIXBUF_VERSION", "GDK_PIXBUF_API_VERSION", "GDK_PIXBUF_BINARY_VERSION"])
 
     # gtk & gdk
-    dl.download("gtk/distsrc", "http://ftp.gnome.org/pub/gnome/sources/gtk+/3.12/gtk+-3.12.2.tar.xz")
+    dl.download("gtk/distsrc", "http://ftp.gnome.org/pub/gnome/sources/gtk+/3.24/gtk+-3.24.35.tar.xz")
     makeVariablesFile("gtk/distsrc/gtk/Makefile.in", "gtk/distsrc/gtk/Sources.mk",
                       ["am__libgtk_3_la_SOURCES_DIST"])
     makeVariablesFile("gtk/distsrc/configure", "gtk/distsrc/Config.mk",
                       ["GTK_MAJOR_VERSION", "GTK_MINOR_VERSION", "GTK_MICRO_VERSION",
                        "GTK_BINARY_AGE", "GTK_VERSION", "GTK_API_VERSION", "GTK_BINARY_VERSION"])
     makeVariablesFile("gtk/distsrc/gdk/Makefile.in", "gtk/distsrc/gdk/Sources.mk",
-                      ["am__libgdk_3_la_SOURCES_DIST"])
-    makeVariablesFile("gtk/distsrc/gtk/a11y/Makefile.in", "gtk/distsrc/gtk/a11y/Sources.mk",
-                      ["gtka11y_c_sources"])
+                      ["gdk_deprecated_c_sources", "gdk_c_sources", "common_sources"])
 
     # freetype, fontconfig, harfbuzz
     dl.download("freetype/distsrc", "https://download.savannah.gnu.org/releases/freetype/freetype-2.13.0.tar.xz")
@@ -361,6 +359,9 @@ def run():
     dl.download("harfbuzz/distsrc", "https://github.com/harfbuzz/harfbuzz/releases/download/7.0.1/harfbuzz-7.0.1.tar.xz")
     makeVariablesFile("harfbuzz/distsrc/src/Makefile.in", "harfbuzz/distsrc/src/Makefile.sources",
                       ["HB_BASE_sources", "HB_GLIB_sources", "HB_FT_sources"])
+
+    # libepoxy
+    dl.download("libepoxy/distsrc", "https://ftp.osuosl.org/pub/blfs/conglomeration/libepoxy/libepoxy-1.5.10.tar.xz")
 
     # libintl ( GDB comes with a self contained version)
     dl.download("libintl/distsrc", "https://ftp.gnu.org/gnu/gdb/gdb-13.1.tar.xz")

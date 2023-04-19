@@ -4,6 +4,8 @@
 #undef _GDK_EXTERN
 #include "config.h.win32"
 
+#define HAVE_FLOCKFILE 1
+
 // now we make some overrides
 #undef ENABLE_NLS
 

@@ -21,18 +21,18 @@ include $(LOCAL_PATH)/Sources.mk
 
 GDK_ANDROID_SOURCES := gdkwindow-android.c  gdkevents-android.c \
                        gdkscreen-android.c gdkdisplay-android.c \
-                       gdkinput-android.c gdkjni.c
+                       gdkinput-android.c gdkjni.c gdkenumtypes.c
 GDK_ANDROID_SOURCES := $(addprefix ../../../gdk/, $(GDK_ANDROID_SOURCES))
 
 LOCAL_MODULE:= gdk
-LOCAL_SRC_FILES:= $(GDK_ANDROID_SOURCES) $(filter %.c, $(am__libgdk_3_la_SOURCES_DIST))
+LOCAL_SRC_FILES:= $(GDK_ANDROID_SOURCES) $(filter %.c, $(common_sources))
 LOCAL_EXPORT_LDLIBS := -llog
 LOCAL_CFLAGS += -DNVALGRIND=1 -DGDK_COMPILATION=1 $(CAIRO_CFLAGS)
 LOCAL_C_INCLUDES := $(MAKEFILE_PATH) $(MAKEFILE_PATH)/include $(MAKEFILE_PATH)/include/gdk $(MAKEFILE_PATH)/../gtk \
-                    $(GTK_SOURCES_PATH) $(GDK_PIXBUG_INCLUDES) $(GLIB_INCLUDES) $(LIBINTL_INCLUDES) \
-                    $(PANGO_INCLUDES) $(CAIRO_INCLUDES) $(FONTCONFIG_INCLUDES)
+                    $(GTK_SOURCES_PATH) $(GDK_PIXBUG_INCLUDES) $(GLIB_INCLUDES) $(LIBINTL_INCLUDES) $(FRIBIDI_INCLUDES) \
+                    $(PANGO_INCLUDES) $(CAIRO_INCLUDES) $(FONTCONFIG_INCLUDES) $(MAKEFILE_PATH)/../libepoxy/include $(MAKEFILE_PATH)/../libepoxy/distsrc/include
 LOCAL_STATIC_LIBRARIES := android_native_app_glue \
-                          glib gio gobject gmodule fontconfig pango cairo gdk-pixbuf
+                          glib gio gobject gmodule fontconfig fribidi libepoxy pango cairo gdk-pixbuf
 
 export GDK_INCLUDES := $(LOCAL_PATH) $(MAKEFILE_PATH)/include
 
@@ -42,6 +42,8 @@ $(call import-module,glib)
 $(call import-module,gio)
 $(call import-module,gobject)
 $(call import-module,fontconfig)
+$(call import-module,libepoxy)
+$(call import-module,fribidi)
 $(call import-module,pango)
 $(call import-module,cairo)
 $(call import-module,gdk-pixbuf)

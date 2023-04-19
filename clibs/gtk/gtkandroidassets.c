@@ -13,6 +13,7 @@
 // gfileutils-like Android "assets" accessors
 
 #include <android_native_app_glue.h>
+#include <android/log.h>
 
 #include "gtkandroidprivate.h"
 #include "gtkandroidassets.h"
@@ -58,6 +59,32 @@ static void g_aasset_file_init(GAAssetFile *resource)
 {
 }
 
+static GFile *g_aasset_file_get_parent(GFile *file)
+{
+	char *dirname;
+	GFile *parent;
+	GAAssetFile *aaf;
+    AAsset* asset;
+	AAssetManager* assetManager = _gtk_android_glue_app->activity->assetManager;
+
+	/* FIXME: This call will cause a crash. We need to find a different way to get its path, i.e. from AAsset or something. */
+	dirname = g_path_get_dirname (g_file_get_path(file));
+
+	asset =  AAssetManager_openDir(assetManager, dirname + strlen("assets/"));
+	g_return_val_if_fail(asset != NULL, NULL);
+
+	aaf = g_object_new(G_TYPE_AASSET_FILE, NULL);
+	aaf->asset = asset;
+
+    return G_FILE(aaf);
+}
+
+static gboolean g_aasset_has_uri_scheme(GFile *file, const char *uri_scheme)
+{
+	__android_log_print(ANDROID_LOG_DEBUG, "GTKAndroid", "Checked for URI scheme: %s", uri_scheme);
+	return FALSE;
+}
+
 static GFileInputStream *g_aasset_file_read(GFile         *file,
                                             GCancellable  *cancellable,
                                             GError       **error)
@@ -76,6 +103,8 @@ static GFileInputStream *g_aasset_file_read(GFile         *file,
 static void g_aasset_file_file_iface_init(GFileIface *iface)
 {
     iface->read_fn = g_aasset_file_read;
+	iface->get_parent = g_aasset_file_get_parent;
+	iface->has_uri_scheme = &g_aasset_has_uri_scheme;
 }
 
 ///////////////////////////////////////////////////////////////////////

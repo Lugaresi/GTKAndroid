@@ -218,7 +218,7 @@ static GdkVisual *gdk_android_screen_get_rgba_visual(GdkScreen *screen)
 {
     g_return_val_if_fail(screen == (GdkScreen *)_gdk_screen, NULL);
 
-    return NULL;
+    return GDK_ANDROID_SCREEN(screen)->visual;
 }
 
 static gint gdk_android_screen_get_number(GdkScreen *screen)

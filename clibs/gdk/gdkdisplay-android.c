@@ -194,12 +194,6 @@ static gint gdk_android_display_pop_error_trap(GdkDisplay *display,
     return 0;
 }
 
-static GList *_gdk_android_display_list_devices(GdkDisplay *dpy)
-{
-    g_debug("_gdk_android_display_list_devices is called");
-    return NULL;
-}
-
 static GdkCursor *_gdk_android_display_get_cursor_for_type(GdkDisplay *display,
                                                            GdkCursorType cursor_type)
 {
@@ -331,7 +325,6 @@ static void gdk_android_display_class_init (GdkAndroidDisplayClass *klass)
     display_class->supports_input_shapes = gdk_android_display_supports_input_shapes;
     display_class->supports_composite = gdk_android_display_supports_composite;
 
-    display_class->list_devices = _gdk_android_display_list_devices;
     display_class->get_cursor_for_type = _gdk_android_display_get_cursor_for_type;
     display_class->get_cursor_for_name = _gdk_android_display_get_cursor_for_name;
     display_class->get_cursor_for_surface = _gdk_android_display_get_cursor_for_surface;
@@ -368,6 +361,7 @@ gboolean gdk_android_init_display(struct android_app *app, GError **error)
                                 EGL_BLUE_SIZE, 8,
                                 EGL_GREEN_SIZE, 8,
                                 EGL_RED_SIZE, 8,
+								EGL_ALPHA_SIZE, 8,
                                 EGL_NONE
                              };
     const EGLint ctxAttribs[] = {
